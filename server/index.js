@@ -1,18 +1,24 @@
 const express = require('express')
 const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
-const bot = require('./bot/index')
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+const {bot, activeUsers} = require('./bot/index')
 const bus = require('./events/index')
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/views/index.html');
+})
 
 const newMessageEvent = 'new-message'
 
-app.get('/', (req, res) => {
-  res.sendFile('../client/index.html');
-});
 
-io.on('connection', ()=> {
+io.on('connection', (socket)=> {
   console.log('io connected')
+  socket.on('site message', (msg)=> {
+    activeUsers.forEach((i)=> {
+      bot.telegram.sendMessage(i.id, msg)
+    })
+  })
 })
 // bot.hears('log', (ctx) => {
 //   console.log(ctx.chat)
@@ -35,6 +41,7 @@ io.on('connection', ()=> {
 
 
 bot.launch()
-app.listen(3000, ()=> {
+// server.listen(80);
+server.listen(3000, ()=> {
   console.log(`Server is running on port 3000`)
 })

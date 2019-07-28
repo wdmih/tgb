@@ -41,4 +41,12 @@ bot.command('status', (ctx)=> {
   }
 })
 
-module.exports = bot
+bot.command('showUsers', (ctx)=> {
+  if(activeUsers.length) {
+    activeUsers.forEach((i)=> ctx.reply(i.id))
+  } else {
+    ctx.reply('No active users')
+  }
+})
+
+module.exports = { bot, activeUsers }
