@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import socketIOClient from 'socket.io-client'
 
 import ActivationButton from './ActivationButton'
 import Chat from './Chat'
@@ -11,9 +10,6 @@ export default class App extends Component {
       active: false
     }
     this.toggleChat = this.toggleChat.bind(this)
-  }
-  componentDidMount () {
-    const socket = socketIOClient('http://localhost:8080')
   }
   toggleChat = () => {
     this.setState((state) => {
