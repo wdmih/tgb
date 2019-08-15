@@ -18,21 +18,23 @@ export default class Chat extends Component {
     this.inputHandler = this.inputHandler.bind(this)
   }
   inputHandler (e) {
-    e.preventDefault()
     this.setState({ input: e.target.value })
   }
+
   sendMessage (e) {
     e.preventDefault()
-    this.state.client.sendMessage(this.state.input)
-    this.addMsgToChat()
+    this.setState({ message: {
+      timeStamp: new Date(),
+      from: 'client',
+      message: this.state.input
+    } }, () => {
+      this.state.client.sendMessage(this.state.message)
+      this.addMsgToChat(this.state.message)
+    })
   }
-  addMsgToChat () {
+  addMsgToChat (msg) {
     this.setState(state => {
-      const chatMessages = [...state.chatMessages, {
-        timeStamp: new Date(),
-        from: 'client',
-        msg: state.input
-      }]
+      const chatMessages = [...state.chatMessages, msg]
       return {
         chatMessages,
         input: ''

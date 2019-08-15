@@ -1,4 +1,4 @@
-module.exports = class Managers {
+class Managers {
   constructor () {
     this.managers = []
   }
@@ -27,3 +27,7 @@ module.exports = class Managers {
     })
   }
 }
+
+const activeManagers = new Managers()
+
+module.exports = activeManagers

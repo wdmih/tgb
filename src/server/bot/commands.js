@@ -1,6 +1,4 @@
-const Managers = require('./Mangers')
-
-const activeManagers = new Managers()
+const activeManagers = require('./Mangers')
 
 module.exports = {
   welcome: (ctx) => {

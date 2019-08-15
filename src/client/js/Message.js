@@ -13,7 +13,7 @@ export default class Message extends Component {
     return (
       <div className={`chat-message-wrap ${message.from === 'client' ? 'chat-message-wrap--client' : 'chat-message-wrap--server'}`}>
         <div className="chat-message__author"><span>{message.from === 'client' ? 'You:' : `${message.from}:` }</span></div>
-        <div className="chat-message">{message.msg}</div>
+        <div className="chat-message">{message.message}</div>
       </div>
     )
   }

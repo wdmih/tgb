@@ -1,6 +1,6 @@
 const config = require('config')
 const Telegraf = require('telegraf')
-const { welcome, setOnline, setOffline, checkStatus } = require('./handlers')
+const { welcome, setOnline, setOffline, checkStatus } = require('./commands')
 
 const apiKey = config.get('Telegraf.apiKey')
 
