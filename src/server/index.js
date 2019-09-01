@@ -1,15 +1,15 @@
+// TODO:
+// 1) Need logic to store client id for private messaging
+// 2) Need fix keyboard when manager didn`t stop session before quit from chat
+// 3) Client notification of active managers
+
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const bot = require('./bot/bot')
-const io = require('socket.io')(server)
+global.io = require('socket.io')(server)
 
-const { haveConnected, receiveMsg } = require('./io/handlers')
-
-io.on('connection', (client) => {
-  haveConnected(client)
-  client.on('message from client', (msg) => receiveMsg(msg))
-})
+require('./io/handlers')
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 8080

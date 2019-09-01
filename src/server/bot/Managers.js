@@ -7,6 +7,22 @@ class Managers {
     return this.managers
   }
 
+  getFreeManagers () {
+    return this.managers.filter((man) => {
+      return man.isFree === true
+    })
+  }
+
+  setManagerToFree (ctx) {
+    const manager = this.findUser(ctx)
+    manager.isFree = true
+  }
+
+  setManagerToBusy (ctx) {
+    const manager = this.findUser(ctx)
+    manager.isFree = false
+  }
+
   addManager (man) {
     this.managers.push(man)
   }

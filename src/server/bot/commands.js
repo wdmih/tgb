@@ -1,31 +1,31 @@
-const activeManagers = require('./Mangers')
+const keyboard = require('./keyboards')
+const activeManagers = require('./Managers')
 
 module.exports = {
   welcome: (ctx) => {
-    ctx.reply('Welcome! Please send your status \n /online \n /offline')
+    ctx.reply('To start receive messages from your site press "/online" button, if you need help press send me /help command at any time',
+      keyboard.onlineKeyboard())
   },
   setOnline: (ctx) => {
     if (!activeManagers.findUser(ctx)) {
       activeManagers.addManager(ctx.chat)
-      ctx.reply('OK! Now you will receive messages from site')
+      ctx.reply('OK! Now you will receive messages from site, to stop session please press button "/offline" below or send me command /offline at any time you want',
+        keyboard.offlineKeyboard())
     } else {
       ctx.reply('You already online')
     }
   },
   setOffline: (ctx) => {
-    let index = activeManagers.findUserIndex(ctx)
+    const index = activeManagers.findUserIndex(ctx)
     if (index > -1) {
       activeManagers.removeManager(index)
-      ctx.reply('OK! Now you disconected from site')
+      ctx.reply('OK! Now you disconected from site',
+        keyboard.onlineKeyboard())
     } else {
       ctx.reply('You already offline')
     }
   },
-  checkStatus: (ctx) => {
-    if (activeManagers.findUser(ctx)) {
-      ctx.reply('Your status - ONLINE')
-    } else {
-      ctx.reply('Your status - OFFLINE')
-    }
+  showHelp: (ctx) => {
+    ctx.reply('help will be soon')
   }
 }

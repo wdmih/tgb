@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
 const outputDirectory = 'dist'
@@ -30,7 +30,8 @@ module.exports = {
             sourceMap: true
           }
         },
-        { loader: 'postcss-loader',
+        {
+          loader: 'postcss-loader',
           options: {
             autoprefixer: {
               browsers: ['last 2 versions']
@@ -39,7 +40,8 @@ module.exports = {
             plugins: () => [
               autoprefixer
             ]
-          } },
+          }
+        },
         {
           loader: 'sass-loader',
           options: {
