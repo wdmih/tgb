@@ -1,5 +1,4 @@
 // TODO:
-// 1) change logic that cleans user input
 // 2) Add "from" info when receive message from server
 // 3) Add scroll to last message in chat
 // 4) Add notification when no active managers at this time
@@ -60,6 +59,7 @@ export default class Chat extends Component {
     }, () => {
       this.state.client.sendMessage(this.state.message)
       this.addMsgToChat(this.state.message)
+      this.setState({ input: '' })
     })
   }
 
@@ -67,8 +67,7 @@ export default class Chat extends Component {
     this.setState(state => {
       const chatMessages = [...state.chatMessages, msg]
       return {
-        chatMessages,
-        input: ''
+        chatMessages
       }
     })
   }

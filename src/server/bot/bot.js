@@ -15,8 +15,14 @@ bot.use(stage.middleware())
 // Bot welcome command
 bot.start((ctx) => welcome(ctx))
 // Bot command to acive user. Activated user will receive messages from site
-bot.command('online', (ctx) => ctx.scene.enter('online'))
+bot.hears('Online', (ctx) => ctx.scene.enter('online'))
 // Show bot help
-bot.command('help', (ctx) => showHelp(ctx))
+bot.hears('Help', (ctx) => showHelp(ctx))
+bot.hears('Status', (ctx) => checkStatus(ctx))
+bot.on('message', (ctx) => {
+  if (checkStatus(ctx) === false) {
+    ctx.reply('Now you can`t send messages to clients')
+  }
+})
 
 module.exports = bot
