@@ -7,9 +7,14 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const bot = require('./bot/bot')
-global.io = require('socket.io')(server)
+global.io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+})
 
-require('./io/handlers')
+require('./io')
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 8080

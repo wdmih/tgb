@@ -20,7 +20,7 @@ bot.hears('Online', (ctx) => ctx.scene.enter('online'))
 bot.hears('Help', (ctx) => showHelp(ctx))
 bot.hears('Status', (ctx) => checkStatus(ctx))
 bot.on('message', (ctx) => {
-  if (checkStatus(ctx) === false) {
+  if (!checkStatus(ctx)) {
     ctx.reply('Now you can`t send messages to clients')
   }
 })

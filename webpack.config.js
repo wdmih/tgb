@@ -2,8 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const autoprefixer = require('autoprefixer')
-
 const outputDirectory = 'dist'
 
 module.exports = {
@@ -33,13 +31,11 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            autoprefixer: {
-              browsers: ['last 2 versions']
-            },
-            sourceMap: true,
-            plugins: () => [
-              autoprefixer
-            ]
+            postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
           }
         },
         {

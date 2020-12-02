@@ -9,6 +9,7 @@ module.exports = {
   setOnline: (ctx) => {
     if (!activeManagers.findUser(ctx)) {
       activeManagers.addManager(ctx.chat)
+      global.io.emit('ready to listen')
       ctx.reply('OK! Now you will receive messages from site, to stop session please press button "/offline" below or send me command /offline at any time you want')
     } else {
       ctx.reply('You already online')

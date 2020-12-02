@@ -14,6 +14,7 @@ export default class Chat extends Component {
     super(props)
 
     this.state = {
+      isManagersOnline: false,
       input: '',
       message: {},
       chatMessages: [],
@@ -27,12 +28,19 @@ export default class Chat extends Component {
 
   componentDidMount () {
     document.addEventListener('keydown', this.keydownHandler)
+
     this.state.client.socket.on('message to client', (msg) => {
       this.addMsgToChat({
         timeStamp: new Date(),
         from: 'server',
         message: msg
       })
+    })
+    this.state.client.socket.on('ready to listen', () => {
+      this.setState({ isManagersOnline: true })
+    })
+    this.state.client.socket.on('no active managers', () => {
+      this.setState({ isManagersOnline: false })
     })
   }
 

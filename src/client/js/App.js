@@ -11,13 +11,15 @@ export default class App extends Component {
     }
     this.toggleChat = this.toggleChat.bind(this)
   }
+
   toggleChat = () => {
     this.setState((state) => {
       return { active: !state.active }
     })
   }
+
   render () {
-    let { active } = this.state
+    const { active } = this.state
     return (
       <div className="chat-app">
         { active ? <Chat/> : ''}
